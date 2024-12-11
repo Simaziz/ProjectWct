@@ -3,5 +3,9 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "presets": ["next/babel"]
+
 }
+
+
