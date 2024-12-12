@@ -1,10 +1,20 @@
-// import { useState, useEffect } from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import OurGymMotiveClass from './components/OurGymMotiveClass';
+import Pricing from './components/Pricing';
 
 import {} from "@fortawesome/free-solid-svg-icons"
 export default function Home() {
   return (
     <header className="bg-white">
+      {/* bg header */}
+      <div className="  h-screen bg-[url('/images/bg.png')] bg-cover bg-center max-sm:h-screen  ">
+         {/* text */}
+         <div className="p-[6rem] text-white ">
+                <h1 className="text-[3rem] font-bold">GymMotive,<br /> Where Fitness <br /> Meets Motivation</h1>
+                <p className="mt-[1rem]"> Transform your body and mind with personalized training <br /> programs. Achieve your goals, stay motivated, and embrace <br /> a healthier lifestyle—all with GymMotive by your side.</p>
+            </div>
+      </div>
       <div >
        <h1 className="text-black flex justify-center font-bold text-[2rem] p-[10px]">Explore Our Program</h1>
       </div>
@@ -177,225 +187,9 @@ export default function Home() {
   </div>
 </div>
 {/* after card3 */}
-<div className='text-black mt-[10px]'>
-<h2 className='flex justify-center font-bold text-[2rem]'>Our GymMotive Classes</h2>
-<p className='flex justify-center'> Let's join our famous class, the GymMotive provided will definitely be useful for you.</p>
-<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
-  {/* Body Building */}
-  <div className="bg-white shadow-md rounded-lg overflow-hidden">
-    <img
-      src="/path-to-body-building-image.jpg"
-      alt="Body Building"
-      className="w-full h-48 object-cover"
-    />
-    <div className="p-6">
-      <h3 className="text-xl font-bold mb-2">BODY BUILDING</h3>
-      <p className="text-gray-600 mb-4">
-        Build your strength and sculpt your physique through structured
-        workout plans. Achieve your fitness goals with expert trainers guiding
-        you every step.
-      </p>
-      <p className="text-gray-800 font-medium">
-        Hanzo <span className="text-gray-500 text-sm">Trainer</span>
-      </p>
-      <a href="#" className="text-blue-600 font-semibold mt-2 inline-block">
-        View
-      </a>
-    </div>
-  </div>
-
-  {/* Weight Lifting */}
-  <div className="bg-white shadow-md rounded-lg overflow-hidden">
-    <img
-      src="/path-to-weight-lifting-image.jpg"
-      alt="Weight Lifting"
-      className="w-full h-48 object-cover"
-    />
-    <div className="p-6">
-      <h3 className="text-xl font-bold mb-2">WEIGHT LIFTING</h3>
-      <p className="text-gray-600 mb-4">
-        Master the art of weightlifting with personalized training sessions.
-        Focus on improving technique, building power, and increasing overall
-        strength under the supervision of our professional trainers.
-      </p>
-      <p className="text-gray-800 font-medium">
-        Hanzo <span className="text-gray-500 text-sm">Trainer</span>
-      </p>
-      <a href="#" className="text-blue-600 font-semibold mt-2 inline-block">
-        View
-      </a>
-    </div>
-  </div>
-
-  {/* Cardio */}
-  <div className="bg-white shadow-md rounded-lg overflow-hidden">
-    <img
-      src="/path-to-cardio-image.jpg"
-      alt="Cardio"
-      className="w-full h-48 object-cover"
-    />
-    <div className="p-6">
-      <h3 className="text-xl font-bold mb-2">CARDIO</h3>
-      <p className="text-gray-600 mb-4">
-        Boost your heart health and stamina with our cardio-focused sessions.
-        Engage in high-intensity exercises that improve endurance, burn
-        calories, and promote a healthy lifestyle.
-      </p>
-      <p className="text-gray-800 font-medium">
-        Badang <span className="text-gray-500 text-sm">Trainer</span>
-      </p>
-      <a href="#" className="text-blue-600 font-semibold mt-2 inline-block">
-        View
-      </a>
-    </div>
-  </div>
-
-  {/* Martial Arts */}
-  <div className="bg-white shadow-md rounded-lg overflow-hidden">
-    <img
-      src="/path-to-martial-arts-image.jpg"
-      alt="Martial Arts"
-      className="w-full h-48 object-cover"
-    />
-    <div className="p-6">
-      <h3 className="text-xl font-bold mb-2">MARTIAL ARTS</h3>
-      <p className="text-gray-600 mb-4">
-        Learn discipline, self-defense, and mental focus through martial arts.
-        Our program covers various techniques and training styles, suitable
-        for all skill levels.
-      </p>
-      <p className="text-gray-800 font-medium">
-        Hanzo <span className="text-gray-500 text-sm">Trainer</span>
-      </p>
-      <a href="#" className="text-blue-600 font-semibold mt-2 inline-block">
-        View
-      </a>
-    </div>
-  </div>
-
-  {/* Yoga */}
-  <div className="bg-white shadow-md rounded-lg overflow-hidden">
-    <img
-      src="/path-to-yoga-image.jpg"
-      alt="Yoga"
-      className="w-full h-48 object-cover"
-    />
-    <div className="p-6">
-      <h3 className="text-xl font-bold mb-2">YOGA</h3>
-      <p className="text-gray-600 mb-4">
-        Achieve balance, flexibility, and inner peace with our yoga classes.
-        Designed for all fitness levels, these sessions promote mindfulness
-        and physical well-being.
-      </p>
-      <p className="text-gray-800 font-medium">
-        Hanzo <span className="text-gray-500 text-sm">Trainer</span>
-      </p>
-      <a href="#" className="text-blue-600 font-semibold mt-2 inline-block">
-        View
-      </a>
-    </div>
-  </div>
-
-  {/* Cycling */}
-  <div className="bg-white shadow-md rounded-lg overflow-hidden">
-    <img
-      src="/path-to-cycling-image.jpg"
-      alt="Cycling"
-      className="w-full h-48 object-cover"
-    />
-    <div className="p-6">
-      <h3 className="text-xl font-bold mb-2">CYCLING</h3>
-      <p className="text-gray-600 mb-4">
-        Pedal your way to fitness with our high-energy cycling sessions. Build
-        lower-body strength, improve endurance, and enjoy a fun and dynamic
-        workout experience.
-      </p>
-      <p className="text-gray-800 font-medium">
-        Badang <span className="text-gray-500 text-sm">Trainer</span>
-      </p>
-      <a href="#" className="text-blue-600 font-semibold mt-2 inline-block">
-        View
-      </a>
-    </div>
-  </div>
-</div>
-
-</div>
-{/* after card 4 */}
- <div className='text-black'>
- <div className="bg-gray-50 py-16 px-8">
-  <div className="text-center mb-12">
-    <h2 className="text-3xl font-bold mb-2">Pricing & Packages</h2>
-    <p className="text-gray-600">Select the best plan that fits your needs and start learning today!</p>
-  </div>
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-    {/* Basic Plan */}
-    <div className="bg-white shadow-md rounded-lg p-6 text-center">
-      <h3 className="text-lg font-bold mb-2">Basic Plan</h3>
-      <p className="text-4xl font-extrabold text-blue-900 mb-4">$49</p>
-      <ul className="text-gray-600 mb-6 space-y-2">
-        <li>Personal Trainer</li>
-        <li>Convenient Time</li>
-        <li>Special Class</li>
-        <li>Group Training</li>
-        <li>Free Fitness Training</li>
-      </ul>
-      <button className="px-6 py-2 text-blue-900 font-semibold border border-blue-300 rounded-lg hover:bg-blue-100">
-        Get Started
-      </button>
-    </div>
-
-    {/* Beginner Plan */}
-    <div className="bg-white shadow-md rounded-lg p-6 text-center">
-      <h3 className="text-lg font-bold mb-2">Beginner Plan</h3>
-      <p className="text-4xl font-extrabold text-blue-900 mb-4">$79</p>
-      <ul className="text-gray-600 mb-6 space-y-2">
-        <li>Personal Trainer</li>
-        <li>Convenient Time</li>
-        <li>Special Class</li>
-        <li>Group Training</li>
-        <li>Free Fitness Training</li>
-      </ul>
-      <button className="px-6 py-2 text-blue-900 font-semibold border border-blue-300 rounded-lg hover:bg-blue-100">
-        Get Started
-      </button>
-    </div>
-
-    {/* Premium Plan */}
-    <div className="bg-white shadow-md rounded-lg p-6 text-center">
-      <h3 className="text-lg font-bold mb-2">Premium Plan</h3>
-      <p className="text-4xl font-extrabold text-blue-900 mb-4">$109</p>
-      <ul className="text-gray-600 mb-6 space-y-2">
-        <li>Personal Trainer</li>
-        <li>Convenient Time</li>
-        <li>Special Class</li>
-        <li>Group Training</li>
-        <li>Free Fitness Training</li>
-      </ul>
-      <button className="px-6 py-2 text-blue-900 font-semibold border border-blue-300 rounded-lg hover:bg-blue-100">
-        Get Started
-      </button>
-    </div>
-
-    {/* Ultimate Plan */}
-    <div className="bg-white shadow-md rounded-lg p-6 text-center">
-      <h3 className="text-lg font-bold mb-2">Ultimate Plan</h3>
-      <p className="text-4xl font-extrabold text-blue-900 mb-4">$149</p>
-      <ul className="text-gray-600 mb-6 space-y-2">
-        <li>Personal Trainer</li>
-        <li>Convenient Time</li>
-        <li>Special Class</li>
-        <li>Group Training</li>
-        <li>Free Fitness Training</li>
-      </ul>
-      <button className="px-6 py-2 text-blue-900 font-semibold border border-blue-300 rounded-lg hover:bg-blue-100">
-        Get Started
-      </button>
-    </div>
-  </div>
-</div>
-
- </div>
+<OurGymMotiveClass/>
+{/* pricing */}
+<Pricing/>
  {/* after card 5 */}
  
   <div className=''>
