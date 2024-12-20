@@ -34,10 +34,14 @@ export default function Home() {
                 <li className="hover:text-blue-400"><Link href="/Mylearning">My Leaning</Link></li>
             </ul>
             </div>
-            <div className="">
-              
+            <div className="flex items-center space-x-3">
+  <div className="w-10 h-10 bg-gray-300 rounded-full">
+  
+  </div>
+  <span className="text-lg font-medium text-gray-800 text-white">Sardor</span>
+</div>
 
-            </div>
+       
             {/* <div className="float-start gap-2 max-sm:gap-1 flex  justify-center items-center ">
             <button className="font-bold mr-1 text-white  hover:text-blue-400 max-sm:mr-1 max-sm:text-[8px]"><Link href="/signIn">Sign In</Link></button>
             <button className="bg-white p-[11px] font-bold rounded-lg hover:bg-black text-black hover:text-white border-2 max-sm:text-[10px] max-sm:gap-1 max-sm:p-0 "><Link href="/signUp">Create free acount</Link></button>
