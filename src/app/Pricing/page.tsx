@@ -1,4 +1,6 @@
 import PricingC from "../components/Pricing";
+import OurGymMotiveTrainer from "../components/OurGymMotiveTrainer";
+import Schedule from "../components/Schedule";
 export default function Pricing (){
     return(
         <header>
@@ -9,6 +11,14 @@ export default function Pricing (){
             {/* after bg */}
             <div>
                 <PricingC/>
+            </div>
+            {/* after price */}
+            <div>
+                <OurGymMotiveTrainer/>
+            </div>
+            {/* after Trainer */}
+            <div>
+                <Schedule/>
 
             </div>
         </header>

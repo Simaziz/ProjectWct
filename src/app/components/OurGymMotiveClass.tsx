@@ -1,13 +1,28 @@
+import image from "public/images/image.png";
+import Image from "next/image";
+import image2 from "public/images/image2.png";
+import image3 from "public/images/image3.png"
+import image4 from "public/images/image4.png"
+import image5 from "public/images/image5.png"
+import image6 from "public/images/image6.png"
+
 export default function OurGymMotiveClass(){
     return(
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8">
+      
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-8 text-black">
+          
         {/* Body Building */}
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <img
-            src="/path-to-body-building-image.jpg"
+        <div className="bg-white shadow-lg rounded-2xl overflow-hidden  p-[1rem]  ">
+          <Image
+
+            src={image}
             alt="Body Building"
-            className="w-full h-48 object-cover"
+            className="w-full h-50 object-contain mt-[15px] rounded-xl"
+            
           />
+
+
+
           <div className="p-6">
             <h3 className="text-xl font-bold mb-2">BODY BUILDING</h3>
             <p className="text-gray-600 mb-4">
@@ -25,11 +40,11 @@ export default function OurGymMotiveClass(){
         </div>
       
         {/* Weight Lifting */}
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <img
-            src="/path-to-weight-lifting-image.jpg"
+        <div className="bg-white shadow-lg rounded-2xl   p-[1rem]">
+          <Image
+            src={image2}
             alt="Weight Lifting"
-            className="w-full h-48 object-cover"
+            className="w-full h-50 object-contain mt-[15px] rounded-xl"
           />
           <div className="p-6">
             <h3 className="text-xl font-bold mb-2">WEIGHT LIFTING</h3>
@@ -41,18 +56,18 @@ export default function OurGymMotiveClass(){
             <p className="text-gray-800 font-medium">
               Hanzo <span className="text-gray-500 text-sm">Trainer</span>
             </p>
-            <a href="#" className="text-blue-600 font-semibold mt-2 inline-block">
+            <a href="#" className="text-blue-600 font-semibold mt-2 inline-block" >
               View
             </a>
           </div>
         </div>
       
         {/* Cardio */}
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <img
-            src="/path-to-cardio-image.jpg"
-            alt="Cardio"
-            className="w-full h-48 object-cover"
+        <div className="bg-white shadow-md rounded-2xl overflow-hidden p-[1rem] ">
+          <Image
+            src={image3}
+            alt="High Quality"
+            className="w-full h-50 object-contain mt-[15px] rounded-xl"
           />
           <div className="p-6">
             <h3 className="text-xl font-bold mb-2">CARDIO</h3>
@@ -72,10 +87,10 @@ export default function OurGymMotiveClass(){
       
         {/* Martial Arts */}
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <img
-            src="/path-to-martial-arts-image.jpg"
+          <Image
+            src={image4}
             alt="Martial Arts"
-            className="w-full h-48 object-cover"
+            className="w-full h-50 object-contain mt-[15px] rounded-xl"
           />
           <div className="p-6">
             <h3 className="text-xl font-bold mb-2">MARTIAL ARTS</h3>
@@ -95,10 +110,10 @@ export default function OurGymMotiveClass(){
       
         {/* Yoga */}
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <img
-            src="/path-to-yoga-image.jpg"
+          <Image
+            src={image5}
             alt="Yoga"
-            className="w-full h-48 object-cover"
+            className="w-full h-50 object-contain mt-[15px] rounded-xl"
           />
           <div className="p-6">
             <h3 className="text-xl font-bold mb-2">YOGA</h3>
@@ -118,10 +133,10 @@ export default function OurGymMotiveClass(){
       
         {/* Cycling */}
         <div className="bg-white shadow-md rounded-lg overflow-hidden">
-          <img
-            src="/path-to-cycling-image.jpg"
+          <Image
+            src={image6}
             alt="Cycling"
-            className="w-full h-48 object-cover"
+            className="w-full h-50 object-contain mt-[15px] rounded-xl"
           />
           <div className="p-6">
             <h3 className="text-xl font-bold mb-2">CYCLING</h3>

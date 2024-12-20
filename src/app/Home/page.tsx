@@ -1,12 +1,54 @@
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import OurGymMotiveClass from './components/OurGymMotiveClass';
-import Pricing from './components/Pricing';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import OurGymMotiveClass from "../components/OurGymMotiveClass"
+import Pricing from '../components/Pricing';
+import Image from "next/image"
+import rectangle1 from "public/images/Rectangle1.png"
+import rectangle2 from "public/images/Rectangle2.png"
+import rectangle3 from "public/images/Rectangle3.png"
+import key1 from "public/images/key1.png"
+import key2 from "public/images/key2.png"
+import key3 from "public/images/key3.png"
+import OurGymMotiveTrainer from "../components/OurGymMotiveTrainer"
+import pf1 from "public/images/pf1.png"
+import pf2 from "public/images/pf2.png"
+import pf3 from "public/images/pf3.png"
+import Link from "next/link"
 
-import {} from "@fortawesome/free-solid-svg-icons"
+
+// import {} from "@fortawesome/free-solid-svg-icons"
 export default function Home() {
   return (
     <header className="bg-white">
+        <div className="flex justify-center gap-[3rem] bg-black p-[1rem] fixed w-[100%]">
+             <div className="flex items-center justify-center ">
+                <Image  src="/images/logo.png" alt="Logo" width={100} height={100}/>
+            </div>
+            <div className="">
+            <ul className="flex gap-[1rem] justify-center items-center text-[1.5rem] mt-2 text-white max-sm:text-[5px] max-sm: ">
+                <li className="hover:text-blue-400"><Link href="/">Home</Link></li>
+                <li className="hover:text-blue-400"><Link href="/Classes">Classes</Link></li>
+                <li className="hover:text-blue-400"><Link href="/Pricing">Pricing</Link></li>
+                <li className="hover:text-blue-400"><Link href="/AboutUs">About Us</Link></li>
+                <li className="hover:text-blue-400"><Link href="/Contact">Contact</Link></li>
+                <li className="hover:text-blue-400"><Link href="/Mylearning">My Leaning</Link></li>
+            </ul>
+            </div>
+            <div className="">
+              
+
+            </div>
+            {/* <div className="float-start gap-2 max-sm:gap-1 flex  justify-center items-center ">
+            <button className="font-bold mr-1 text-white  hover:text-blue-400 max-sm:mr-1 max-sm:text-[8px]"><Link href="/signIn">Sign In</Link></button>
+            <button className="bg-white p-[11px] font-bold rounded-lg hover:bg-black text-black hover:text-white border-2 max-sm:text-[10px] max-sm:gap-1 max-sm:p-0 "><Link href="/signUp">Create free acount</Link></button>
+
+            
+         
+            </div> */}
+
+           
+         
+           </div>
       {/* bg header */}
       <div className="  h-screen bg-[url('/images/bg.png')] bg-cover bg-center max-sm:h-screen  ">
          {/* text */}
@@ -68,32 +110,32 @@ export default function Home() {
 
 <div className="flex flex-col lg:flex-row items-center justify-between px-6 lg:px-16 py-12 bg-white">
   {/* Left Section with Images */}
-  <div className="flex flex-col space-y-4 lg:space-y-0 lg:space-x-4 lg:flex-row">
-    <div className="flex-shrink-0">
-      <img
-        src="image1.jpg"
+  <div className="space-y-4 lg:space-y-0 lg:space-x-4 lg:flex-row  ">
+    <div className="flex-shrink-0 ">
+      <Image
+        src={rectangle1}
         alt="Woman Lifting Weights"
-        className="rounded-lg shadow-lg w-60 h-40 object-cover"
+        className="rounded-lg shadow-lg w-80 h-100 object-cover "
       />
     </div>
-    <div className="flex-shrink-0">
-      <img
-        src="image2.jpg"
+    <div className="flex-shrink-0  mt-[8rem] ml-[10rem]">
+      <Image
+        src={rectangle2}
         alt="Man Working Out"
-        className="rounded-lg shadow-lg w-60 h-40 object-cover"
+        className="rounded-lg shadow-lg w-60 h-40 object-cover  ml-[9rem]"
       />
     </div>
-    <div className="flex-shrink-0">
-      <img
-        src="image3.jpg"
+    <div className="flex-shrink-0  mt-[10rem]">
+      <Image
+        src={rectangle3}
         alt="Woman Squatting Weights"
-        className="rounded-lg shadow-lg w-60 h-40 object-cover"
+        className="rounded-lg shadow-lg w-80 h-100 object-cover"
       />
     </div>
   </div>
 
   {/* Right Section with Text */}
-  <div className="mt-8 lg:mt-0 lg:ml-8 text-center lg:text-left">
+  <div className="mt-8 lg:mt-0 ml-[10rem] text-center lg:text-left ">
     <h2 className="text-4xl font-bold text-gray-900 mb-4">
       Transform your physique with our <span className="text-blue-700">fitness plan.</span>
     </h2>
@@ -141,11 +183,11 @@ export default function Home() {
   {/* Features Section */}
   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
     {/* Card 1 */}
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden text-center">
-      <img
-        src="image1.jpg"
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden text-center p-[1rem]">
+      <Image
+        src={key1}
         alt="Get In The Groove"
-        className="w-full h-64 object-cover"
+        className="w-full h-50 object-contain mt-[15px] rounded-xl"
       />
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-800 mb-2">GET IN THE GROOVE</h3>
@@ -156,11 +198,11 @@ export default function Home() {
     </div>
 
     {/* Card 2 */}
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden text-center">
-      <img
-        src="image2.jpg"
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden text-center p-[1rem]">
+      <Image
+        src={key2}
         alt="Get Fit Don't Quit"
-        className="w-full h-64 object-cover"
+        className="w-full h-50 object-contain mt-[15px] rounded-xl"
       />
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-800 mb-2">GET FIT DON'T QUIT</h3>
@@ -171,11 +213,11 @@ export default function Home() {
     </div>
 
     {/* Card 3 */}
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden text-center">
-      <img
-        src="image3.jpg"
+    <div className="bg-white rounded-lg shadow-lg overflow-hidden text-center p-[1rem]">
+      <Image
+        src={key3}
         alt="Work Your Butt Off"
-        className="w-full h-64 object-cover"
+        className="w-full h-50 object-contain mt-[15px] rounded-xl"
       />
       <div className="p-6">
         <h3 className="text-xl font-bold text-gray-800 mb-2">WORK YOUR BUTT OFF</h3>
@@ -186,9 +228,17 @@ export default function Home() {
     </div>
   </div>
 </div>
-{/* after card3 */}
+{/* our gym motive class */}
+{/* text */}
+<div className=" text-black text-center  mt-8 ">
+        <h1 className="text-[2rem] font-bold" >Our GymMotive Classes</h1>
+        <p>Let's join our famous class, the GymMotive provided will definitely be useful for you.</p>
+
+        </div>
 <OurGymMotiveClass/>
 {/* pricing */}
+{/* our gym trainer  */}
+<OurGymMotiveTrainer/>
 <Pricing/>
  {/* after card 5 */}
  
@@ -200,18 +250,18 @@ export default function Home() {
     <div className="flex items-center justify-between">
       {/* Avatar Section */}
       <div className="flex items-center">
-        <img
-          src="https://via.placeholder.com/40"
+        <Image
+          src={pf1}
           alt="User 1"
           className="w-10 h-10 rounded-full border-2 border-gray-300 -ml-2"
         />
-        <img
-          src="https://via.placeholder.com/40"
+        <Image
+          src={pf2}
           alt="User 2"
           className="w-10 h-10 rounded-full border-2 border-gray-300 -ml-2"
         />
-        <img
-          src="https://via.placeholder.com/40"
+        <Image
+          src={pf3}
           alt="User 3"
           className="w-10 h-10 rounded-full border-2 border-gray-300 -ml-2"
         />
@@ -226,8 +276,8 @@ export default function Home() {
           you can eat”
         </p>
         <div className="flex items-center">
-          <img
-            src="https://via.placeholder.com/40"
+          <Image
+            src={pf2}
             alt="Jonathan Edward"
             className="w-10 h-10 rounded-full"
           />
