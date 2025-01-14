@@ -3,7 +3,7 @@ import Founder from "../components/founder"
 export default function aboutus(){
     return(
        <header>
-        <div className="bg-[url('/images/bg4.png')] h-[814]">
+        <div className="bg-[url('/images/bg4.png')] h-[814] text-white">
         {/* text */}
         <div className="h-[814] p-[13rem]">
         <h1 className=" font-bold text-[3rem] mb-5 ">About GymMotive</h1>

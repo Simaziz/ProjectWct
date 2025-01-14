@@ -2,7 +2,7 @@ export default function footer(){
     return(
        
      <div className="">
-<footer className="bg-blue-900 text-white py-10 px-20 ">
+<footer className="bg-blue-950 text-white py-10 px-20 ">
   <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
     {/* Logo and Address Section */}
     <div>

@@ -6,7 +6,7 @@ import profess from "public/images/Profess.png"
 export default function OurMission(){
     return(
         <div>
-            <div className="py-12 bg-gray-100">
+            <div className="py-12 bg-gray-100">n
   <h2 className="text-4xl font-bold text-center text-gray-800 mb-4">About Us</h2>
   <h3 className="text-2xl font-semibold text-center text-gray-600 mb-8">
     Mission & Vision
