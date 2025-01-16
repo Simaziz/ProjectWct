@@ -44,9 +44,13 @@ function TraineeNavbar() {
             {/* <li className="hover:text-blue-400 ">
               <Link href="/traineePricing">Pricing</Link>
             </li> */}
+                 <li className="hover:text-blue-400 ">
+              <Link href="/traineePricing">Pricing</Link>
+            </li>
             <li className="hover:text-blue-400 ">
               <Link href="/traineeOverview">Dashboard</Link>
             </li>
+       
           </ul>
         </div>
 
@@ -64,18 +68,26 @@ function TraineeNavbar() {
           </div>
           <span className="text-lg font-medium text-gray-900">Sardor</span>
         </div> */}
+       <div className="gap-2 flex">
+           <Link href="/loginTrainer">
+              <button className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+                Register for trainer
+              </button>
+            </Link>
         <div className="flex items-center space-x-4 p-4">
           <div className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center">
             <svg className="w-6 h-6 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
               {/* User icon SVG path */}
             </svg>
           </div>
+      
           <Link href="/pfTrainee">
             <span className="text-lg font-medium text-gray-900 cursor-pointer">
               {user ? user.name : 'Guest'}
             </span>
           </Link>
         </div>
+           </div>
       </div>
     </nav>
   );

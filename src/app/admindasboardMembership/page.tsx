@@ -1,12 +1,14 @@
 import React from 'react';
 import { LayoutDashboard, UserCircle, Users, Briefcase, CreditCard, Calendar, MessageSquare, Contact, Settings, LogOut } from 'lucide-react';
 import Sidebar from "src/app/components/SidebarAdmin"
+import Images from 'next/image';
+import im from 'public/images/PF2dasboard.png';
 const TrainerCard = ({ name, role, email }) => (
   <div className="bg-white p-6 rounded-lg shadow-sm">
     <div className="flex flex-col items-center">
       <div className="w-24 h-24 mb-4">
-        <img
-          src="/api/placeholder/96/96"
+        <Images
+          src={im}
           alt={name}
           className="w-full h-full rounded-full object-cover"
         />

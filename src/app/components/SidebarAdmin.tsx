@@ -1,6 +1,5 @@
-"use client"
+"use client";
 
-// import { useState } from 'react';
 import { LayoutDashboard, UserCircle, Users, Briefcase, CreditCard, Calendar, MessageSquare, Contact, Settings, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -21,6 +20,8 @@ export default function SideBarAdmin() {
     { icon: Users, label: 'Trainee', href: '/admindasboardTrainee' },
     { icon: Briefcase, label: 'Staff', href: '/admindasboardStaff' },
     { icon: UserCircle, label: 'Membership', href: '/admindasboardMembership' },
+    { icon: Users, label: 'Approve Trainer ', href: '/adminApproveRegister' }, // Added new item
+    { icon: Users, label: 'Approve Comment ', href: '/AdminDissaproveCmt' }, // Added new item
     // { icon: LayoutDashboard, label: 'Classes', href: '/classes' }
   ];
 

@@ -2,13 +2,15 @@
 
 // aimport React from 'react';
 import Sidebar from 'src/app/components/SidebarAdmin';
+import Image from 'next/image';
+import im from 'public/images/PF1Dasboard.png';
 
 const StaffCard = ({ name, role, email }) => (
   <div className="bg-white p-6 rounded-lg shadow-sm">
     <div className="flex flex-col items-center text-center">
       <div className="w-24 h-24 mb-4">
-        <img
-          src="/api/placeholder/96/96"
+        <Image
+          src={im}
           alt={name}
           className="w-full h-full rounded-full object-cover"
         />

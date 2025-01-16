@@ -2,6 +2,8 @@
 
 import React from 'react';
 import Sidebar from 'src/app/components/SidebarAdmin';
+import Image from 'next/image';
+import im from 'public/images/meat_ 2.png';
 
 const TraineeTable = () => {
   const trainees = [
@@ -41,9 +43,9 @@ const TraineeTable = () => {
                 <td className="px-6 py-4">
                   <div className="flex items-center">
                     <div className="h-8 w-8 flex-shrink-0">
-                      <img
+                      <Image
                         className="h-8 w-8 rounded-full"
-                        src="/api/placeholder/32/32"
+                        src={im}
                         alt=""
                       />
                     </div>

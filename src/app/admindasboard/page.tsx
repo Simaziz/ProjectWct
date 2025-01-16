@@ -31,7 +31,7 @@ const Dashboard = () => {
   ];
 
   return (
-    <header>
+    <header className="text-black">
      
        <div className="flex min-h-screen bg-gray-50">
 

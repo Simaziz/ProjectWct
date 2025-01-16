@@ -1,9 +1,4 @@
-// Remove 'use client' directive from here, keep it in the Client Component
-import { Elements } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-
-// Load your Stripe public key
-const stripePromise = loadStripe("your-stripe-public-key"); // Replace with your actual Stripe public key
+// src/app/layout.tsx
 
 import localFont from "next/font/local";
 import Navbar from "./components/Navbar";
@@ -31,7 +26,6 @@ interface RootLayoutProps {
   noNavbar?: boolean;
 }
 
-// Remove Elements wrapping from here
 export default function RootLayout({ children, noNavbar }: RootLayoutProps) {
   return (
     <html lang="en">

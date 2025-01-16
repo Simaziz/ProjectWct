@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "src/app/components/navbarTraineeNotpay";
+import Navbar from "src/app/components/traineeNavbar";
 
 // import "./globals.css";
 
