@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import {
   LayoutDashboard,
   UserCircle,
@@ -18,7 +19,7 @@ const TrainerCard = ({ name, role, email, picture }) => (
   <div className="bg-white p-6 rounded-lg shadow-sm">
     <div className="flex flex-col items-center">
       <div className="w-24 h-24 mb-4">
-        <img
+        <Image
           src={picture}
           alt={name}
           className="w-full h-full rounded-full object-cover"

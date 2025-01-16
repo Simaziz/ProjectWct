@@ -1,7 +1,7 @@
 "use client";
 import Image from 'next/image'
 import img1 from 'public/images/picTrainerHome1.png'
-import { Line } from 'react-chartjs-2';
+// import Line from 'react-chartjs-2';
 
 import {
     Chart as ChartJS,
@@ -91,7 +91,7 @@ export default function TrainerHome(){
           <div className='p-[2rem]'>
           <div className="bg-gray-800 rounded-lg shadow-lg p-[1rem]">
       <h2 className="text-gray-300 text-lg mb-4">Client Stats</h2>
-      <Line data={data} options={options} />
+      {/* <Line data={data} options={options} /> */}
     </div>
           </div>
         </header>

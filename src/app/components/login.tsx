@@ -1,3 +1,4 @@
+import Image from 'next/image';
 const Login = () => {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
@@ -8,7 +9,7 @@ const Login = () => {
   
           {/* Google Login Button */}
           <button className="flex items-center justify-center w-full border border-gray-300 py-2 rounded-lg mb-6 hover:bg-gray-100">
-            <img
+            <Image
               src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Google_2015_logo.svg"
               alt="Google Logo"
               className="w-5 h-5 mr-2"

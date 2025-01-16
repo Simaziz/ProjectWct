@@ -48,7 +48,7 @@ const SignIn = () => {
           <h1 className="text-3xl font-bold text-blue-600 mb-2">Log In</h1>
           <p className="text-gray-500 mb-6">to get started</p>
           <button className="w-full mb-4 bg-white py-2 rounded text-sm flex shadow-md border-[1px] border-gray-300 text-black items-center justify-center hover:bg-gray-500 hover:text-white">
-            <img
+            <Image
               src="https://developers.google.com/identity/images/g-logo.png"
               alt="Google"
               className="h-5 w-5 mr-2"

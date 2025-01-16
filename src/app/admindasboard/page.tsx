@@ -3,6 +3,7 @@ import Navbar from "src/app/components/NavbarMylearningTrainee"
 import Sidebar from "src/app/components/SidebarAdmin"
 import { LayoutDashboard, UserCircle, Users, Briefcase, CreditCard, Calendar, MessageSquare, Contact, Settings, LogOut } from 'lucide-react';
 import SideBarAdmin from 'src/app/components/SidebarAdmin';
+import Navbar1 from "src/app/components/navbarMylearning"
 
 const DashboardCard = ({ title, count, icon: Icon }) => (
   <div className="bg-white p-6 rounded-lg shadow-sm flex flex-col items-center justify-center">
@@ -32,6 +33,7 @@ const Dashboard = () => {
 
   return (
     <header className="text-black">
+      <Navbar1/>
      
        <div className="flex min-h-screen bg-gray-50">
 
