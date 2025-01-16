@@ -11,7 +11,7 @@ export default function Home() {
         {/* text */}
         <div className=" text-black text-center  mt-8 ">
         <h1 className="text-[2rem] font-bold" >Our GymMotive Classes</h1>
-        <p>Let's join our famous class, the GymMotive provided will definitely be useful for you.</p>
+        <p>Lets join our famous class, the GymMotive provided will definitely be useful for you.</p>
 
         </div>
         <OurGymMotiveClass/> 

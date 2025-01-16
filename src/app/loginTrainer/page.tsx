@@ -77,7 +77,7 @@ export default function LoginTrainer() {
 
         <div className="mt-4 text-center">
           <p>
-            Don't have an account?{" "}
+            Do not have an account?{" "}
             <Link href="/register" className="text-blue-500 hover:underline">
               Register here
             </Link>

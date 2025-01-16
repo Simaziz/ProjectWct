@@ -199,7 +199,7 @@ export default function Home() {
             Our Key Features See Some
           </h2>
           <p className="text-gray-600 mt-2">
-            Let's join our famous class, the GymMotive provided will definitely
+            Lets join our famous class, the GymMotive provided will definitely
             be useful for you.
           </p>
         </div>
@@ -232,7 +232,7 @@ export default function Home() {
             />
             <div className="p-6">
               <h3 className="text-xl font-bold text-gray-800 mb-2">
-                GET FIT DON'T QUIT
+                GET FIT DONT QUIT
               </h3>
               <p className="text-gray-600">
                 Success isn’t really that difficult. There is a significant?
@@ -263,7 +263,7 @@ export default function Home() {
       <div className=" text-black text-center  mt-8  ">
         <h1 className="text-[2rem] font-bold">Our GymMotive Classes</h1>
         <p>
-          Let's join our famous class, the GymMotive provided will definitely be
+          Lets join our famous class, the GymMotive provided will definitely be
           useful for you.
         </p>
       </div>

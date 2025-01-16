@@ -146,7 +146,7 @@ export default function Home() {
     <h4 className="text-blue-600 text-lg font-semibold">Why choose us?</h4>
     <h2 className="text-3xl font-bold text-gray-800 mt-2">Our Key Features See Some</h2>
     <p className="text-gray-600 mt-2">
-      Let's join our famous class, the GymMotive provided will definitely be useful for you.
+      Lets join our famous class, the GymMotive provided will definitely be useful for you.
     </p>
   </div>
 
@@ -175,7 +175,7 @@ export default function Home() {
         className="w-full h-50 object-contain mt-[15px] rounded-xl"
       />
       <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-800 mb-2">GET FIT DON'T QUIT</h3>
+        <h3 className="text-xl font-bold text-gray-800 mb-2">GET FIT DO NOT QUIT</h3>
         <p className="text-gray-600">
           Success isn’t really that difficult. There is a significant?
         </p>
@@ -202,7 +202,7 @@ export default function Home() {
 {/* text */}
 <div className=" text-black text-center  mt-8 ">
         <h1 className="text-[2rem] font-bold" >Our GymMotive Classes</h1>
-        <p>Let's join our famous class, the GymMotive provided will definitely be useful for you.</p>
+        <p>Lets join our famous class, the GymMotive provided will definitely be useful for you.</p>
         </div>
 <OurGymMotiveClass/>
 {/* pricing */}

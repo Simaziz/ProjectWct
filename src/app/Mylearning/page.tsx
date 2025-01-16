@@ -19,7 +19,7 @@ export default function Mylearning(){
     <h2 className="text-sm font-semibold text-indigo-600 uppercase">Contact</h2>
     <h1 className="text-3xl font-bold text-gray-800 mt-2">My Learning</h1>
     <p className="text-gray-500 mt-4">
-      We'd love to hear from you! Fill out the form below or reach out to us via email or phone.
+      We  love to hear from you! Fill out the form below or reach out to us via email or phone.
     </p>
   </div>
   <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">

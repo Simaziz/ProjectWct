@@ -12,7 +12,7 @@ export default function Contact(){
     <h2 className="text-sm font-semibold text-indigo-600 uppercase">Contact</h2>
     <h1 className="text-3xl font-bold text-gray-800 mt-2">Contact Us</h1>
     <p className="text-gray-500 mt-4">
-      We'd love to hear from you! Fill out the form below or reach out to us via email or phone.
+      We love to hear from you! Fill out the form below or reach out to us via email or phone.
     </p>
   </div>
   <div className="bg-white shadow-lg rounded-lg p-8 grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -64,7 +64,7 @@ export default function Contact(){
         <textarea
           id="message"
           placeholder="Write your message..."
-          rows="5"
+          // rows="5"
           className="w-full mt-2 px-4 py-2 border rounded-md focus:ring-indigo-500 focus:border-indigo-500"
         ></textarea>
       </div>
