@@ -5,9 +5,13 @@ import jwt from "jsonwebtoken";
 
 export async function POST(req) {
   try {
+    console.log("Received login request");
+
     const { email, password } = await req.json();
+    console.log("Email:", email);
 
     if (!email || !password) {
+      console.log("Email or password missing");
       return new Response(
         JSON.stringify({ message: "Email and password are required." }),
         { status: 400 }
@@ -15,9 +19,13 @@ export async function POST(req) {
     }
 
     await connectToDatabase();
+    console.log("Connected to database");
 
     const user = await User.findOne({ email });
+    console.log("User found:", user);
+
     if (!user) {
+      console.log("User not found");
       return new Response(
         JSON.stringify({ message: "Invalid email or password." }),
         { status: 401 }
@@ -25,7 +33,10 @@ export async function POST(req) {
     }
 
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
+    console.log("Password correct:", isPasswordCorrect);
+
     if (!isPasswordCorrect) {
+      console.log("Incorrect password");
       return new Response(
         JSON.stringify({ message: "Invalid email or password." }),
         { status: 401 }
@@ -37,6 +48,7 @@ export async function POST(req) {
       process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
+    console.log("Token generated:", token);
 
     return new Response(
       JSON.stringify({
