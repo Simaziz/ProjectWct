@@ -13,7 +13,7 @@ const SignIn = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    setError("");  // Reset error before each attempt
   
     try {
       const res = await fetch("/api/signin", {
@@ -27,6 +27,7 @@ const SignIn = () => {
       if (!res.ok) {
         setError(data.message || "An unknown error occurred.");
       } else {
+        // Store the token and user data in localStorage on success
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user)); // Set user data
         router.push("/traineeHome");
@@ -40,13 +41,15 @@ const SignIn = () => {
   return (
     <div className="p-[10rem] bg-white">
       <div className="border-b-2 border-black w-full">
-        <Image src={logo} alt=""></Image>
+        <Image src={logo} alt="Logo" />
       </div>
 
       <div className="flex items-center justify-center min-h-screen bg-white shadow-lg">
         <div className="bg-white rounded-lg p-8 w-full max-w-md">
           <h1 className="text-3xl font-bold text-blue-600 mb-2">Log In</h1>
           <p className="text-gray-500 mb-6">to get started</p>
+
+          {/* Google Login Button - You can integrate Google login later */}
           <button className="w-full mb-4 bg-white py-2 rounded text-sm flex shadow-md border-[1px] border-gray-300 text-black items-center justify-center hover:bg-gray-500 hover:text-white">
             <Image
               src="https://developers.google.com/identity/images/g-logo.png"
@@ -55,6 +58,7 @@ const SignIn = () => {
             />
             Login with Google
           </button>
+
           <div className="flex items-center justify-center mb-4 text-black">
             <div className="flex-grow border-t border-gray-300"></div>
             <span className="mx-4 text-gray-500">or Login with Email</span>

@@ -8,8 +8,8 @@ export async function POST(req) {
     console.log("Received login request");
 
     const { email, password } = await req.json();
-    console.log("Email:", email);
 
+    // Check if email and password are provided
     if (!email || !password) {
       console.log("Email or password missing");
       return new Response(
@@ -18,12 +18,24 @@ export async function POST(req) {
       );
     }
 
+    // Check if email format is valid (basic check)
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      return new Response(
+        JSON.stringify({ message: "Invalid email format." }),
+        { status: 400 }
+      );
+    }
+
+    // Connect to the database
     await connectToDatabase();
     console.log("Connected to database");
 
+    // Find user in the database
     const user = await User.findOne({ email });
     console.log("User found:", user);
 
+    // Check if user exists
     if (!user) {
       console.log("User not found");
       return new Response(
@@ -32,6 +44,7 @@ export async function POST(req) {
       );
     }
 
+    // Check password validity
     const isPasswordCorrect = await bcrypt.compare(password, user.password);
     console.log("Password correct:", isPasswordCorrect);
 
@@ -43,13 +56,15 @@ export async function POST(req) {
       );
     }
 
+    // Generate JWT token
     const token = jwt.sign(
       { userId: user._id, email: user.email, name: user.name },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET, // Ensure JWT_SECRET is set in your .env file
       { expiresIn: "1h" }
     );
     console.log("Token generated:", token);
 
+    // Send successful response
     return new Response(
       JSON.stringify({
         message: "Login successful.",

@@ -14,8 +14,10 @@ export async function POST(req) {
       );
     }
 
+    // Connect to the database
     await connectToDatabase();
 
+    // Check if the user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return new Response(
@@ -24,8 +26,10 @@ export async function POST(req) {
       );
     }
 
+    // Hash the password before saving
     const hashedPassword = await bcrypt.hash(password, 12);
 
+    // Create a new user and save to the database
     const newUser = new User({
       name,
       email,
@@ -34,9 +38,10 @@ export async function POST(req) {
 
     await newUser.save();
 
+    // Generate JWT token for the newly created user
     const token = jwt.sign(
       { userId: newUser._id, email: newUser.email, name: newUser.name },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET,  // Ensure your secret key is set in .env file
       { expiresIn: "1h" }
     );
 
