@@ -62,4 +62,4 @@ export async function GET(req) {
   }
 }
 
-export const runtime = 'edge'; // Optional: You can use 'edge' runtime if needed for performance optimization
+// Remove the 'runtime: edge' line for default Node.js runtime
