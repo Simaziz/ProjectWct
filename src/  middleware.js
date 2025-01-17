@@ -1,7 +1,7 @@
 // middleware.js
-
-export function middleware(req) {
-    if (req.url?.startsWith('/admin')) {
+export function middleware(request) {
+    // Ensure we check for the correct request object type and check if URL starts with '/admin'
+    if (request.url.startsWith('/admin')) {
       // Logic for '/admin' routes
       console.log("Admin-related request detected.");
     }
@@ -11,6 +11,6 @@ export function middleware(req) {
   }
   
   export const config = {
-    matcher: '/admin/*',
+    matcher: '/admin/*',  // Only apply this middleware to '/admin' routes
   };
   
