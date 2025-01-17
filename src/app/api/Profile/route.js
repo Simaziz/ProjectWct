@@ -2,19 +2,21 @@ import { connectToDatabase } from "@/utils/db";
 import User from "@/models/User";
 import jwt from "jsonwebtoken";
 
-export default async function handler(req, res) {
-  if (req.method !== "GET") {
-    return res.status(405).json({ message: "Method not allowed" });
-  }
-
-  const authHeader = req.headers.authorization;
+export async function GET(req) {
+  const authHeader = req.headers.get("authorization");
   if (!authHeader) {
-    return res.status(401).json({ message: "Authorization header missing" });
+    return new Response(
+      JSON.stringify({ message: "Authorization header missing" }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   const token = authHeader.split(" ")[1];
   if (!token) {
-    return res.status(401).json({ message: "Token not provided" });
+    return new Response(
+      JSON.stringify({ message: "Token not provided" }),
+      { status: 401, headers: { "Content-Type": "application/json" } }
+    );
   }
 
   try {
@@ -28,19 +30,36 @@ export default async function handler(req, res) {
 
     const user = await User.findById(decoded.userId).select("-password");
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      return new Response(
+        JSON.stringify({ message: "User not found" }),
+        { status: 404, headers: { "Content-Type": "application/json" } }
+      );
     }
 
-    res.status(200).json({ user });
+    return new Response(
+      JSON.stringify({ user }),
+      { status: 200, headers: { "Content-Type": "application/json" } }
+    );
   } catch (error) {
     console.error("Error fetching user profile:", error);
 
     if (error.name === "TokenExpiredError") {
-      return res.status(401).json({ message: "Token has expired" });
+      return new Response(
+        JSON.stringify({ message: "Token has expired" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
     } else if (error.name === "JsonWebTokenError") {
-      return res.status(401).json({ message: "Invalid token" });
+      return new Response(
+        JSON.stringify({ message: "Invalid token" }),
+        { status: 401, headers: { "Content-Type": "application/json" } }
+      );
     } else {
-      return res.status(500).json({ message: "Internal server error" });
+      return new Response(
+        JSON.stringify({ message: "Internal server error" }),
+        { status: 500, headers: { "Content-Type": "application/json" } }
+      );
     }
   }
 }
+
+export const runtime = 'edge'; // Optional: You can use 'edge' runtime if needed for performance optimization

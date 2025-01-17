@@ -1,26 +1,41 @@
 import Stripe from 'stripe';
 
-const stripe = new Stripe('your-secret-key-here');  // Use your secret Stripe API key
+// Initialize the Stripe client
+const stripe = new Stripe('your-secret-key-here'); // Replace with your Stripe secret key
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    try {
-      const { payment_method } = req.body;
+export async function POST(req) {
+  try {
+    // Parse the request body
+    const { payment_method } = await req.json();
 
-      // Create a PaymentIntent
-      const paymentIntent = await stripe.paymentIntents.create({
-        amount: 5000, // Amount in the smallest currency unit (e.g., cents)
-        currency: 'usd',
-        payment_method,
-        confirmation_method: 'manual',
-        confirm: true,
-      });
-
-      res.status(200).json({ success: true, paymentIntent });
-    } catch (error) {
-      res.status(400).json({ success: false, message: error.message });
+    if (!payment_method) {
+      return new Response(
+        JSON.stringify({ success: false, message: 'Payment method is required' }),
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
+      );
     }
-  } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+
+    // Create a PaymentIntent
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: 5000, // Amount in the smallest currency unit (e.g., cents)
+      currency: 'usd',
+      payment_method,
+      confirmation_method: 'manual',
+      confirm: true,
+    });
+
+    return new Response(
+      JSON.stringify({ success: true, paymentIntent }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
+  } catch (error) {
+    console.error('Stripe PaymentIntent Error:', error);
+
+    return new Response(
+      JSON.stringify({ success: false, message: error.message }),
+      { status: 400, headers: { 'Content-Type': 'application/json' } }
+    );
   }
 }
+
+export const runtime = 'edge'; // Optional: Use 'edge' runtime for performance

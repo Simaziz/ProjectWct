@@ -1,30 +1,43 @@
 import connectToDatabase from "../../../../lib/mongodb";
-import { ObjectId } from 'mongodb';
+import { ObjectId } from "mongodb";
 
-export default async function handler(req, res) {
-  if (req.method === 'POST') {
-    try {
-      const { db } = await connectToDatabase();
-      const { commentId } = req.body;
+export async function POST(req: Request) {
+  try {
+    // Parse the request body
+    const body = await req.json();
+    const { commentId } = body;
 
-      // Validate input
-      if (!commentId || !ObjectId.isValid(commentId)) {
-        return res.status(400).json({ error: 'Invalid comment ID' });
-      }
-
-      // Delete comment (or update its status)
-      const result = await db.collection('comments').deleteOne({ _id: new ObjectId(commentId) });
-
-      if (result.deletedCount === 0) {
-        return res.status(404).json({ error: 'Comment not found' });
-      }
-
-      res.status(200).json({ message: 'Comment disapproved successfully' });
-    } catch (error) {
-      console.error(`Error disapproving comment (ID: ${req.body?.commentId || 'N/A'}):`, error);
-      res.status(500).json({ error: 'Failed to disapprove the comment. Please try again later.' });
+    // Validate input
+    if (!commentId || typeof commentId !== "string" || !ObjectId.isValid(commentId)) {
+      return new Response(
+        JSON.stringify({ error: "Invalid or missing comment ID" }),
+        { status: 400 }
+      );
     }
-  } else {
-    res.status(405).json({ error: 'Method Not Allowed' });
+
+    // Connect to the database
+    const { db } = await connectToDatabase();
+
+    // Attempt to delete the comment
+    const result = await db.collection("comments").deleteOne({ _id: new ObjectId(commentId) });
+
+    if (result.deletedCount === 0) {
+      return new Response(JSON.stringify({ error: "Comment not found" }), { status: 404 });
+    }
+
+    // Successful response
+    return new Response(JSON.stringify({ message: "Comment disapproved successfully" }), {
+      status: 200,
+    });
+  } catch (error) {
+    console.error("Error disapproving comment:", error);
+    return new Response(
+      JSON.stringify({
+        error: "An error occurred while processing your request. Please try again.",
+      }),
+      { status: 500 }
+    );
   }
 }
+
+export const dynamic = "force-dynamic"; // Optional: Forces dynamic behavior for the route.

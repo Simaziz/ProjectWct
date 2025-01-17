@@ -1,5 +1,5 @@
 "use client";
-import Navbar from "src/app/components/navbarMylearning";
+// import Navbar from "src/app/components/navbarMylearning";
 import { useState, useEffect } from "react";
 import Sidebar from "src/app/components/SidebarAdmin";
 
@@ -38,7 +38,7 @@ const AdminPanel = () => {
 
   return (
    <div>
-    <Navbar />
+    {/* <Navbar /> */}
     <header className="flex">
     <Sidebar />
     <div className="min-h-screen  p-6 ">
