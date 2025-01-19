@@ -39,7 +39,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "lib/models/User.js"  ],
+, "lib/models/User.js", "src/app/api/users/route.js", "src/models/User.ts", "src/app/api/pfTrainer/route.js"  ],
   "exclude": [
     "node_modules"
   ]

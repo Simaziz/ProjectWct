@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Navbar from "src/app/components/traineeNavbar";
+// import Navbar from "src/app/components/traineeNavbar";
 
 export const metadata = {
   title: "Create Next App",
@@ -17,7 +17,7 @@ export default function TraineeLayout({
     <html lang="en">
       <body>
         <div>
-          <Navbar />
+          
           <main>{children}</main>
         </div>
       </body>

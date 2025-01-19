@@ -1,4 +1,4 @@
-import Navbar from "src/app/components/traineeNavbar";
+import Navbar from "src/app/components/navbarTrainer";
 
 export const metadata = {
   title: "Create Next App",

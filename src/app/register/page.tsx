@@ -1,92 +1,68 @@
-"use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+'use client';
 
-export default function Register() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-  const [message, setMessage] = useState("");
-  const router = useRouter();
+import { useState } from 'react';
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+export default function RegisterPage() {
+  const [form, setForm] = useState({ name: '', email: '', password: '' });
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const { name, email, password } = formData;
-
-    // Debug: Log variables to ensure they are populated
-    console.log("Form data:", { name, email, password });
-
     try {
-      const response = await fetch("/api/register", {
-        method: "POST",
+      const res = await fetch('/api/register', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify(form),
       });
 
-      const result = await response.json();
-      console.log("API Response:", result);
-
-      if (response.ok) {
-        // Redirect to a page informing the user to await admin approval
-        router.push("/awaitingApproval");
-      } else {
-        setMessage(result.message || "An error occurred during registration.");
-      }
+      const data = await res.json();
+      setMessage(data.message);
     } catch (error) {
-      console.error("Error during registration:", error);
-      setMessage("An internal server error occurred.");
+      console.error('Error during registration:', error);
+      setMessage('Error during registration');
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <form onSubmit={handleSubmit} className="p-8 bg-white shadow-md rounded">
-        <h1 className="text-2xl font-bold mb-4">Register</h1>
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-          className="w-full mb-4 p-2 border border-gray-300 rounded"
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full mb-4 p-2 border border-gray-300 rounded"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full mb-4 p-2 border border-gray-300 rounded"
-          required
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600"
-        >
-          Register
-        </button>
-        {message && <p className="mt-4 text-red-500">{message}</p>}
-      </form>
+    <div className="flex justify-center items-center h-screen bg-gray-100 text-black">
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">Register</h1>
+        <form onSubmit={handleRegister} className="space-y-4">
+          <input
+            type="text"
+            placeholder="Name"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={form.password}
+            onChange={(e) => setForm({ ...form, password: e.target.value })}
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+          <button
+            type="submit"
+            className="w-full py-2 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
+          >
+            Register
+          </button>
+        </form>
+        {message && <p className="mt-4 text-center text-red-500">{message}</p>}
+      </div>
     </div>
   );
 }

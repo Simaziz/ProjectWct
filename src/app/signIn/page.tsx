@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import logo from "public/images/logoBlack.png";
 import Image from "next/image";
+import google from "public/images/Google.webp";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -52,9 +53,10 @@ const SignIn = () => {
           {/* Google Login Button - You can integrate Google login later */}
           <button className="w-full mb-4 bg-white py-2 rounded text-sm flex shadow-md border-[1px] border-gray-300 text-black items-center justify-center hover:bg-gray-500 hover:text-white">
             <Image
-              src="https://developers.google.com/identity/images/g-logo.png"
+              src={google}
               alt="Google"
-              className="h-5 w-5 mr-2"
+              
+              className="h-5 w-auto mr-2"
             />
             Login with Google
           </button>

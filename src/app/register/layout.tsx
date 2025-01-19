@@ -1,4 +1,4 @@
-import Navbar from "src/app/components/traineeNavbar";
+// import Navbar from "src/app/components/traineeNavbar";
 
 export const metadata = {
   title: "Create Next App",
@@ -10,7 +10,7 @@ export default function TraineeLayout({ children }: { children: React.ReactNode 
     <html lang="en">
       <body>
         <div>
-          <Navbar /> {/* Navbar is rendered by default */}
+          {/* Navbar is rendered by default */}
           <main>{children}</main>
         </div>
       </body>

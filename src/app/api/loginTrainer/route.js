@@ -1,73 +1,51 @@
-import bcrypt from "bcrypt";
-import clientPromise from "../../../../lib/mongodb"; // Adjust the path according to your project structure
+import { NextResponse } from 'next/server';
+import connectToDatabase from '../../../../lib/db';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-export async function POST(req) {
+export const POST = async (request) => {
   try {
-    const { email, password } = await req.json();
+    const { email, password } = await request.json();
 
-    // Validate input
     if (!email || !password) {
-      return new Response(
-        JSON.stringify({ message: "Email and password are required" }),
-        { status: 400 }
-      );
+      return NextResponse.json({ message: 'Email and Password are required' }, { status: 400 });
     }
 
-    // Connect to MongoDB
-    const client = await clientPromise;
-    const db = client.db("your_database_name"); // Replace with your actual DB name
+    const { db } = await connectToDatabase();
 
-    // Look for the user by email
-    const user = await db.collection("users").findOne({ email });
-
+    // Find the user by email
+    const user = await db.collection('users').findOne({ email });
     if (!user) {
-      return new Response(
-        JSON.stringify({ message: "User not found" }),
-        { status: 404 }
-      );
+      return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
-    // Check if the user is approved
-    if (user.status !== "approved") {
-      return new Response(
-        JSON.stringify({
-          message: user.status === "pending"
-            ? "Your account is pending approval."
-            : "Your account has been rejected."
-        }),
+    // Ensure the user is approved by the admin
+    if (user.status !== 'approved') {
+      return NextResponse.json(
+        { message: 'User not approved by admin. Please wait for approval.' },
         { status: 403 }
       );
     }
 
-    // Validate the password using bcrypt
+    // Compare the password
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
-      return new Response(
-        JSON.stringify({ message: "Invalid credentials" }),
-        { status: 401 }
-      );
+      return NextResponse.json({ message: 'Invalid password' }, { status: 401 });
     }
 
-    // Successful login, return the updated user data (including name, email, etc.)
-    const userData = {
-      name: user.name,
-      email: user.email,
-      status: user.status,
-      // Add any other relevant fields from your database
-    };
-
-    return new Response(
-      JSON.stringify({
-        message: "Login successful",
-        user: userData,
-      }),
-      { status: 200 }
+    // Generate a JWT token
+    const token = jwt.sign(
+      { userId: user._id, email: user.email },
+      process.env.JWT_SECRET || 'your-jwt-secret-key',
+      { expiresIn: '1h' }
     );
+
+    return NextResponse.json({ message: 'Login successful', token });
   } catch (error) {
-    console.error("Error during login:", error);
-    return new Response(
-      JSON.stringify({ message: "Internal server error" }),
+    console.error('Error during login:', error);
+    return NextResponse.json(
+      { message: `Error during login: ${error.message}` },
       { status: 500 }
     );
   }
-}
+};

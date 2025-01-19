@@ -22,6 +22,7 @@
     "crypto-browserify": "^3.12.1",
     "disqus-react": "^1.1.5",
     "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "framer-motion": "^11.18.0",
     "google-auth-library": "^9.0.0",
     "jose": "^5.9.6",
