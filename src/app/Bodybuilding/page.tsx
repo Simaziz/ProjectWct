@@ -19,29 +19,36 @@ const Page = () => {
   // Fetch comments from the API
   const fetchComments = async () => {
     try {
-      const response = await axios.get("/api/comments");
-      const approvedComments = response.data.filter((comment) => comment.approved);
+      const response = await axios.get("/api/commentsFetch"); // Custom API endpoint
+      console.log("Fetched Comments:", response.data); // Log the response to check if comments are coming correctly
+      const approvedComments = response.data.filter((comment) => comment.approved); // Show only approved comments
       setComments(approvedComments);
     } catch (err) {
+      console.error("Error fetching comments:", err); // Log the error details for debugging
       setError("Failed to load comments");
     }
   };
+  
+  
 
   // Handle comment submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
+      console.log("Submitting Comment:", { name, message }); // Log payload
       await axios.post("/api/comments", { name, message });
       setName("");
       setMessage("");
-      fetchComments(); // Reload the comments after submitting
+      fetchComments();
     } catch (err) {
+      console.error("Submission Error:", err.response || err); // Log error details
       setError("Failed to submit your comment. Try again.");
     } finally {
       setLoading(false);
     }
   };
+  
 
   // Fetch comments when the page loads
   useEffect(() => {
@@ -73,7 +80,6 @@ const Page = () => {
           </div>
         </section>
 
-        {/* Mission and Vision Section */}
         <div className="w-full max-w-auto mx-auto py-8 px-6 lg:px-12 bg-gray-50">
           <div className="text-center mb-12">
             <p className="text-blue-950 text-sm font-bold tracking-wide uppercase">
