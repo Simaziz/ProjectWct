@@ -1,12 +1,18 @@
 "use client";
-import jwtDecode from "jwt-decode";
+// import jwtDecode from "jwt-decode";
 import Link from "next/link";
 import Image from "next/image";
 import logo from "public/images/logo.png";
 import { useEffect, useState } from "react";
 
+// Define the User type
+interface User {
+  name: string;
+  email: string;
+}
+
 function TraineeNavbar() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     // Check if window is defined (client-side)

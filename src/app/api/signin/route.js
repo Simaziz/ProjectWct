@@ -1,5 +1,5 @@
-import { connectToDatabase } from "@/utils/db";
-import User from "@/models/User";
+import { connectToDatabase } from "../../utils/db";
+import User from "../../models2/User";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -64,12 +64,12 @@ export async function POST(req) {
     );
     console.log("Token generated:", token);
 
-    // Send successful response
+    // Send successful response including _id of the user
     return new Response(
       JSON.stringify({
         message: "Login successful.",
         token,
-        user: { name: user.name, email: user.email },
+        user: { _id: user._id, name: user.name, email: user.email },
       }),
       { status: 200 }
     );

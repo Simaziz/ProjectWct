@@ -4,31 +4,43 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Sidebar from "src/app/components/SidebarAdmin";
 
+// Define the Comment type
+interface Comment {
+  _id: string;
+  name: string;
+  message: string;
+  approved: boolean;
+}
+
 const ManageComments = () => {
-  const [comments, setComments] = useState([]);
-  const [error, setError] = useState(null);
+  const [comments, setComments] = useState<Comment[]>([]); // Use the Comment type
+  const [error, setError] = useState<string | null>(null);
 
   // Fetch pending comments
   const fetchPendingComments = async () => {
     try {
       const response = await axios.get("/api/commentsFetch"); // Fetch all comments
       const pendingComments = response.data.filter(
-        (comment) => !comment.approved // Filter unapproved comments
+        (comment: Comment) => !comment.approved // Filter unapproved comments
       );
       setComments(pendingComments);
     } catch (err) {
-      setError("Failed to load comments");
+      if (err instanceof Error) {
+        setError("Failed to load comments: " + err.message);
+      } else {
+        setError("Failed to load comments: An unknown error occurred.");
+      }
     }
   };
 
   // Approve a comment
-  const handleApprove = async (id) => {
+  const handleApprove = async (id: string) => {
     try {
       const response = await fetch(`/api/comments/${id}/approve`, {
         method: "PUT",
       });
       const data = await response.json();
-  
+
       if (response.ok && data.message === "Comment approved successfully") {
         alert("Comment approved!");
         fetchPendingComments();  // Refresh the list of comments after approval
@@ -36,20 +48,27 @@ const ManageComments = () => {
         alert("Failed to approve the comment.");
       }
     } catch (err) {
-      setError("Failed to approve the comment");
+      if (err instanceof Error) {
+        setError("Failed to approve the comment: " + err.message);
+      } else {
+        setError("Failed to approve the comment: An unknown error occurred.");
+      }
       console.error("Error approving comment:", err);
     }
   };
-  
 
   // Disapprove (delete) a comment
-  const handleDisapprove = async (id) => {
+  const handleDisapprove = async (id: string) => {
     try {
       await axios.delete(`/api/comments/${id}`);
-      fetchPendingComments();
+      fetchPendingComments();  // Refresh the list of comments after deletion
     } catch (err) {
-      console.error("Disapprove error:", err.response?.data || err.message);
-      setError("Failed to disapprove the comment");
+      if (err instanceof Error) {
+        setError("Failed to disapprove the comment: " + err.message);
+      } else {
+        setError("Failed to disapprove the comment: An unknown error occurred.");
+      }
+      console.error("Disapprove error:", err);
     }
   };
 
@@ -59,16 +78,16 @@ const ManageComments = () => {
   }, []);
 
   return (
-    <header className="flex">
+    <header className="flex bg-gray-50 gap-[20rem]">
       <Sidebar />
       <div className="p-6">
-        <h1 className="text-2xl font-bold mb-4">Manage Comments</h1>
+        <h1 className="text-2xl font-bold mb-4 text-black">Manage Comments</h1>
         {error && <p className="text-red-600">{error}</p>}
         <div>
           {comments.length > 0 ? (
             <ul>
               {comments.map((comment) => (
-                <li key={comment._id} className="border-b py-4">
+                <li key={comment._id} className="border-b py-4 text-black">
                   <p>
                     <strong>{comment.name}</strong>: {comment.message}
                   </p>

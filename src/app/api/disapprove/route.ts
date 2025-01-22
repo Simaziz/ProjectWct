@@ -1,4 +1,4 @@
-import connectToDatabase from "../../../../lib/mongodb";
+import {connectToDatabase }from "../../lib2/mongodb";
 import { ObjectId } from "mongodb";
 
 export async function POST(req: Request) {

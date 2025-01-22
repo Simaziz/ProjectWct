@@ -1,7 +1,7 @@
 // src/app/api/users/route.js
 import  {NextResponse} from 'next/server';
 import connect from '../../../../lib/db';
-import User from '../../../models/User'; // Ensure this path is correct
+import User from '../../models2/User'; // Ensure this path is correct
 
 export const GET = async () => {
   try {

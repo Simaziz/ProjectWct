@@ -3,8 +3,14 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
+// Define the User type
+interface User {
+  name: string;
+  email: string;
+}
+
 export default function ProfilePage() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null); // Initialize with the correct type
   const router = useRouter();
 
   useEffect(() => {
@@ -18,7 +24,7 @@ export default function ProfilePage() {
       }
 
       try {
-        const parsedUser = JSON.parse(userData);
+        const parsedUser = JSON.parse(userData) as User; // Parse and assert the type
         setUser(parsedUser);
       } catch (error) {
         console.error("Error parsing user data:", error);

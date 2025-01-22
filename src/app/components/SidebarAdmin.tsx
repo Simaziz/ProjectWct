@@ -3,8 +3,16 @@
 import { LayoutDashboard, UserCircle, Users, Briefcase, CreditCard, Calendar, MessageSquare, Contact, Settings, LogOut } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { FC, ReactElement } from 'react';
 
-const SidebarItem = ({ icon: Icon, label, href, active = false }) => (
+interface SidebarItemProps {
+  icon: FC<{ className?: string }>; // Define the type for the icon prop
+  label: string;
+  href: string;
+  active?: boolean;
+}
+
+const SidebarItem: FC<SidebarItemProps> = ({ icon: Icon, label, href, active = false }) => (
   <Link href={href} className={`flex items-center space-x-3 px-4 py-3 rounded-lg cursor-pointer ${active ? 'bg-blue-600 text-white' : 'hover:bg-blue-50 text-gray-700'}`}>
     <Icon className="w-5 h-5" />
     <span>{label}</span>
@@ -15,8 +23,8 @@ export default function SideBarAdmin() {
   const pathname = usePathname();
 
   const menuItems = [
-    { icon: LayoutDashboard, label: 'Dashboard', href: '/admindasboard' },
-    { icon: UserCircle, label: 'Trainer', href: '/admindasboardTrainer' },
+    // { icon: LayoutDashboard, label: 'Dashboard', href: '/admindasboard' },
+    // { icon: UserCircle, label: 'Trainer', href: '/admindasboardTrainer' },
     { icon: Users, label: 'Trainee', href: '/admindasboardTrainee' },
     { icon: Briefcase, label: 'Staff', href: '/admindasboardStaff' },
     { icon: UserCircle, label: 'Membership', href: '/admindasboardMembership' },
@@ -43,7 +51,7 @@ export default function SideBarAdmin() {
     <header>
       <aside className="w-64 bg-white border-r border-gray-200 p-4">
         <div className="mb-8">
-          <h1 className="text-xl font-bold px-4">Dashboard</h1>
+          <h1 className="text-xl font-bold px-4 text-black">Dashboard</h1>
         </div>
         
         <nav className="space-y-1">

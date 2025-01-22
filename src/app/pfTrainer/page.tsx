@@ -3,8 +3,15 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+// Define the type for the user object
+interface User {
+  name: string;
+  email: string;
+  status: string;
+}
+
 export default function ProfilePage() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null); // Explicitly type the user state
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -82,6 +89,7 @@ export default function ProfilePage() {
           >
             Go to Dashboard
           </button>
+          
         </div>
       </div>
     </div>

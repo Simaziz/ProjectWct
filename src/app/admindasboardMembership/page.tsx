@@ -1,9 +1,18 @@
 import React from 'react';
-import { LayoutDashboard, UserCircle, Users, Briefcase, CreditCard, Calendar, MessageSquare, Contact, Settings, LogOut } from 'lucide-react';
-import Sidebar from "src/app/components/SidebarAdmin"
+import { LayoutDashboard, UserCircle, Users, Briefcase, CreditCard, Calendar, MessageSquare, Contact, Settings, LogOut, LucideIcon } from 'lucide-react';
+import Sidebar from "src/app/components/SidebarAdmin";
 import Images from 'next/image';
 import im from 'public/images/PF2dasboard.png';
-const TrainerCard = ({ name, role, email }) => (
+
+// Define the props for the TrainerCard component
+interface TrainerCardProps {
+  name: string;
+  role: string;
+  email: string;
+}
+
+// TrainerCard component
+const TrainerCard = ({ name, role, email }: TrainerCardProps) => (
   <div className="bg-white p-6 rounded-lg shadow-sm">
     <div className="flex flex-col items-center">
       <div className="w-24 h-24 mb-4">
@@ -20,13 +29,22 @@ const TrainerCard = ({ name, role, email }) => (
   </div>
 );
 
-const SidebarItem = ({ icon: Icon, label, active = false }) => (
+// Define the props for the SidebarItem component
+interface SidebarItemProps {
+  icon: LucideIcon;
+  label: string;
+  active?: boolean;
+}
+
+// SidebarItem component
+const SidebarItem = ({ icon: Icon, label, active = false }: SidebarItemProps) => (
   <div className={`flex items-center space-x-3 px-4 py-3 rounded-lg cursor-pointer ${active ? 'bg-gray-900 text-white' : 'hover:bg-gray-100'}`}>
     <Icon className="w-5 h-5" />
     <span>{label}</span>
   </div>
 );
 
+// TrainerPage component
 const TrainerPage = () => {
   const trainers = [
     {
@@ -54,39 +72,7 @@ const TrainerPage = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar */}
-      <Sidebar/>
-      {/* <aside className="w-64 bg-white border-r border-gray-200 p-4">
-        <div className="mb-8">
-          <div className="flex items-center space-x-2 px-4">
-            <LayoutDashboard className="w-5 h-5" />
-            <span className="text-xl">Dashboard</span>
-          </div>
-        </div>
-        
-        <nav className="space-y-1">
-          <SidebarItem icon={UserCircle} label="Trainer" active />
-          <SidebarItem icon={Users} label="Trainee" />
-          <SidebarItem icon={Briefcase} label="Stuff" />
-          <SidebarItem icon={UserCircle} label="Membership" />
-          <SidebarItem icon={LayoutDashboard} label="Classes" />
-          
-          <div className="py-4">
-            <p className="px-4 text-xs font-semibold text-gray-500 uppercase">Pages</p>
-          </div>
-          
-          <SidebarItem icon={CreditCard} label="Pricing" />
-          <SidebarItem icon={Calendar} label="Calendar" />
-          <SidebarItem icon={MessageSquare} label="Feedback" />
-          <SidebarItem icon={Contact} label="Contact" />
-          <SidebarItem icon={CreditCard} label="Payment" />
-          <SidebarItem icon={Users} label="Team" />
-          
-          <div className="pt-4 mt-4 border-t border-gray-200">
-            <SidebarItem icon={Settings} label="Settings" />
-            <SidebarItem icon={LogOut} label="Logout" />
-          </div>
-        </nav>
-      </aside> */}
+      <Sidebar />
 
       {/* Main Content */}
       <main className="flex-1 p-8">

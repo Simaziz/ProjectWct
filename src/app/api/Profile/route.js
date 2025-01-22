@@ -1,5 +1,5 @@
-import { connectToDatabase } from "@/utils/db";
-import User from "@/models/User";
+import { connectToDatabase } from "@/app/utils/db";
+import User from "@/app/models2/User";
 import jwt from "jsonwebtoken";
 
 export async function GET(req) {

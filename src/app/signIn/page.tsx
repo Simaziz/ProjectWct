@@ -1,10 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react"; // Import FormEvent for typing the event
 import { useRouter } from "next/navigation";
 import logo from "public/images/logoBlack.png";
 import Image from "next/image";
 import google from "public/images/Google.webp";
+
+// Define the type for the API response
+interface ApiResponse {
+  token: string;
+  user: {
+    _id: string;
+    name?: string;
+    email?: string;
+  };
+  message?: string; // Optional error message
+}
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -12,26 +23,35 @@ const SignIn = () => {
   const [error, setError] = useState("");
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setError("");  // Reset error before each attempt
-  
+    setError(""); // Reset error before each attempt
+
     try {
       const res = await fetch("/api/signin", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-  
-      const data = await res.json();
-  
+
+      const data: ApiResponse = await res.json(); // Explicitly type the response
+
       if (!res.ok) {
         setError(data.message || "An unknown error occurred.");
       } else {
+        // Log the response to check if the user object and _id are returned
+        console.log("Login Response:", data);
+
         // Store the token and user data in localStorage on success
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user)); // Set user data
-        router.push("/traineeHome");
+
+        // Check if user._id exists before redirecting
+        if (data.user && data.user._id) {
+          router.push(`/traineeHome/${data.user._id}`);
+        } else {
+          setError("User ID is missing in the response");
+        }
       }
     } catch (error) {
       console.error("Error during signin:", error);
@@ -42,7 +62,7 @@ const SignIn = () => {
   return (
     <div className="p-[10rem] bg-white">
       <div className="border-b-2 border-black w-full">
-        <Image src={logo} alt="Logo" />
+        <Image src={logo} alt="Logo" width={150} height={50} /> {/* Add width and height */}
       </div>
 
       <div className="flex items-center justify-center min-h-screen bg-white shadow-lg">
@@ -55,7 +75,8 @@ const SignIn = () => {
             <Image
               src={google}
               alt="Google"
-              
+              width={20} // Add width
+              height={20} // Add height
               className="h-5 w-auto mr-2"
             />
             Login with Google

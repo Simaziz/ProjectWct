@@ -9,30 +9,40 @@ import scc from 'public/images/scc1.png';
 import trainer from 'public/images/Trainer4.png';
 import axios from 'axios';
 
+// Define the Comment type
+interface Comment {
+  name: string;
+  message: string;
+  approved: boolean;
+}
+
 const Page = () => {
   const [name, setName] = useState(""); // User's name
   const [message, setMessage] = useState(""); // User's comment
-  const [comments, setComments] = useState([]); // Store all comments
+  const [comments, setComments] = useState<Comment[]>([]); // Store all comments
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   // Fetch comments from the API
   const fetchComments = async () => {
     try {
       const response = await axios.get("/api/commentsFetch"); // Custom API endpoint
       console.log("Fetched Comments:", response.data); // Log the response to check if comments are coming correctly
-      const approvedComments = response.data.filter((comment) => comment.approved); // Show only approved comments
+      const approvedComments = response.data.filter(
+        (comment: Comment) => comment.approved // Show only approved comments
+      );
       setComments(approvedComments);
     } catch (err) {
-      console.error("Error fetching comments:", err); // Log the error details for debugging
-      setError("Failed to load comments");
+      if (err instanceof Error) {
+        setError("Failed to load comments: " + err.message);
+      } else {
+        setError("Failed to load comments: An unknown error occurred.");
+      }
     }
   };
-  
-  
 
   // Handle comment submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -42,13 +52,15 @@ const Page = () => {
       setMessage("");
       fetchComments();
     } catch (err) {
-      console.error("Submission Error:", err.response || err); // Log error details
-      setError("Failed to submit your comment. Try again.");
+      if (err instanceof Error) {
+        setError("Failed to submit your comment: " + err.message);
+      } else {
+        setError("Failed to submit your comment: An unknown error occurred.");
+      }
     } finally {
       setLoading(false);
     }
   };
-  
 
   // Fetch comments when the page loads
   useEffect(() => {
@@ -217,22 +229,22 @@ const Page = () => {
 
           {/* Comments Display */}
           <div className="bg-gray-100 py-12">
-          <div className="max-w-screen-lg mx-auto">
-            <h2 className="text-2xl font-semibold mb-6">Comments</h2>
-            {error && <p className="text-red-500">{error}</p>}
-            <ul>
-              {comments.map((comment, index) => (
-                <li
-                  key={index}
-                  className="bg-white p-4 rounded-lg shadow-md mb-4"
-                >
-                  <h3 className="font-bold text-lg">{comment.name}</h3>
-                  <p className="text-gray-700">{comment.message}</p>
-                </li>
-              ))}
-            </ul>
+            <div className="max-w-screen-lg mx-auto">
+              <h2 className="text-2xl font-semibold mb-6">Comments</h2>
+              {error && <p className="text-red-500">{error}</p>}
+              <ul>
+                {comments.map((comment, index) => (
+                  <li
+                    key={index}
+                    className="bg-white p-4 rounded-lg shadow-md mb-4"
+                  >
+                    <h3 className="font-bold text-lg">{comment.name}</h3>
+                    <p className="text-gray-700">{comment.message}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
         </div>
       </main>
     </div>

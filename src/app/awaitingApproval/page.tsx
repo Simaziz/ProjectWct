@@ -4,8 +4,14 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import logo from "public/images/logo.png"; // Replace with your logo
 
+// Define the User type
+interface User {
+  name: string;
+  // Add other properties if needed
+}
+
 export default function AwaitingApproval() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     // Check if the user is logged in
@@ -31,9 +37,8 @@ export default function AwaitingApproval() {
           <p className="text-gray-600 mt-4">Please wait while we process your request. You will be notified once your account is approved.</p>
 
           <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
-  <Link href="/status">Check Status</Link>
-</button>
-
+            <Link href="/status">Check Status</Link>
+          </button>
 
           <div className="mt-6">
             <p className="text-sm text-gray-500">If you need assistance, please <a href="mailto:support@example.com" className="text-blue-500">contact us</a>.</p>

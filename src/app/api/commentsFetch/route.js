@@ -1,4 +1,4 @@
-import {connectToDatabase } from "../../../lib2/mongodb";
+import {connectToDatabase } from "../../lib2/mongodb";
 
 export async function GET() {
   try {

@@ -1,30 +1,33 @@
-import { connectToDatabase } from "../../../../lib2/mongodb";
-import { ObjectId } from "mongodb";
+import { connectToDatabase } from "../../../lib2/mongodb"; // Adjust the path if necessary
+import { ObjectId } from "mongodb"; // Import ObjectId to work with MongoDB IDs
 
-export async function PUT(req, { params }) {
-  const { id } = params;  // Get the comment id from the URL parameter
-
+// Handle DELETE requests for a specific comment by ID
+export async function DELETE(req, { params }) {
   try {
-    const client = await connectToDatabase();
-    const db = client.db();
-    const commentsCollection = db.collection("comments");
+    const { id } = params; // Extract the id from the URL parameters
+    const { db } = await connectToDatabase();
 
-    // Update the "approved" field to true for the comment with the specified id
-    const result = await commentsCollection.updateOne(
-      { _id: new ObjectId(id) },
-      { $set: { approved: true } }
-    );
+    // Delete the comment from the database
+    const result = await db.collection("comments").deleteOne({ _id: new ObjectId(id) });
 
-    if (result.modifiedCount > 0) {
+    // If the comment wasn't found, return a 404
+    if (result.deletedCount === 0) {
       return new Response(
-        JSON.stringify({ message: "Comment approved successfully" }),
-        { status: 200 }
+        JSON.stringify({ error: "Comment not found" }),
+        { status: 404 }
       );
-    } else {
-      return new Response("Failed to approve the comment", { status: 400 });
     }
-  } catch (err) {
-    console.error("Error approving comment:", err);
-    return new Response("Error approving comment", { status: 500 });
+
+    // Return a success message
+    return new Response(
+      JSON.stringify({ message: "Comment deleted successfully" }),
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error deleting comment:", error);
+    return new Response(
+      JSON.stringify({ error: "Failed to delete the comment" }),
+      { status: 500 }
+    );
   }
 }

@@ -1,5 +1,3 @@
-// src/components/PaymentForm.tsx
-
 import { useStripe, useElements, CardElement } from "@stripe/react-stripe-js";
 
 const PaymentForm = () => {
@@ -15,13 +13,17 @@ const PaymentForm = () => {
 
     const cardElement = elements.getElement(CardElement);
 
-    const { token, error } = await stripe.createToken(cardElement);
+    if (cardElement) {
+      const { token, error } = await stripe.createToken(cardElement);
 
-    if (error) {
-      console.error(error);
+      if (error) {
+        console.error(error);
+      } else {
+        console.log("Received Stripe Token:", token);
+        // You can now send the token to your backend for processing
+      }
     } else {
-      console.log("Received Stripe Token:", token);
-      // You can now send the token to your backend for processing
+      console.error("Card element not found.");
     }
   };
 

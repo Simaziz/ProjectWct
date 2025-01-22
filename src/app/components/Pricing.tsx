@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"; // For routing
 export default function PricingC() {
     const router = useRouter(); // Next.js router for navigation
 
-    const handleGetStarted = (planName, price) => {
+    const handleGetStarted = (planName: string, price: number) => {
         // Navigate to the purchaseForm page with query parameters
         router.push(`/creditCard?planName=${encodeURIComponent(planName)}&price=${encodeURIComponent(price)}`);
     };

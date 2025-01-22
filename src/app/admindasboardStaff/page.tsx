@@ -1,11 +1,18 @@
-"use client"
+"use client";
 
-// aimport React from 'react';
 import Sidebar from 'src/app/components/SidebarAdmin';
 import Image from 'next/image';
 import im from 'public/images/PF1Dasboard.png';
 
-const StaffCard = ({ name, role, email }) => (
+// Define the props for the StaffCard component
+interface StaffCardProps {
+  name: string;
+  role: string;
+  email: string;
+}
+
+// StaffCard component
+const StaffCard = ({ name, role, email }: StaffCardProps) => (
   <div className="bg-white p-6 rounded-lg shadow-sm">
     <div className="flex flex-col items-center text-center">
       <div className="w-24 h-24 mb-4">
@@ -22,6 +29,7 @@ const StaffCard = ({ name, role, email }) => (
   </div>
 );
 
+// StaffGrid component
 const StaffGrid = () => {
   const staffMembers = [
     {
@@ -68,24 +76,23 @@ const StaffGrid = () => {
 
   return (
     <header>
-        <div className='flex'>
-            <Sidebar/>
+      <div className='flex'>
+        <Sidebar />
         <div className="p-8">
-      <h1 className="text-2xl font-bold mb-6">Stuff</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {staffMembers.map((member, index) => (
-          <StaffCard
-            key={index}
-            name={member.name}
-            role={member.role}
-            email={member.email}
-          />
-        ))}
-      </div>
-    </div>
+          <h1 className="text-2xl font-bold mb-6">Stuff</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {staffMembers.map((member, index) => (
+              <StaffCard
+                key={index}
+                name={member.name}
+                role={member.role}
+                email={member.email}
+              />
+            ))}
+          </div>
         </div>
+      </div>
     </header>
-   
   );
 };
 

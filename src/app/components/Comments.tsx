@@ -1,9 +1,17 @@
-"use client"
+"use client";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
+// Define the Comment type
+interface Comment {
+  _id: string;
+  name: string;
+  message: string;
+  createdAt: string;
+}
+
 const CommentSection = () => {
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState<Comment[]>([]);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
@@ -19,10 +27,10 @@ const CommentSection = () => {
   };
 
   // Handle comment submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-  
+
     try {
       const response = await axios.post("/api/comments", { name, message });
       if (response.status === 200) {
@@ -41,7 +49,6 @@ const CommentSection = () => {
       setLoading(false);
     }
   };
-  
 
   // Load comments when component mounts
   useEffect(() => {
@@ -51,7 +58,7 @@ const CommentSection = () => {
   return (
     <div>
       <h2>Comments</h2>
-      
+
       {/* Comment form */}
       <form onSubmit={handleSubmit}>
         <input

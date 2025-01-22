@@ -53,7 +53,7 @@ const CreditCardPage = () => {
     // You can perform form validation here if needed
 
     // For example, redirect to a success page
-    router.push(`/traineeHomeafterpay?plan=${planName}&price=${price}`);
+    router.push(`/traineeHome?plan=${planName}&price=${price}`);
   };
 
   if (!planName || !price) {

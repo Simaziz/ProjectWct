@@ -1,11 +1,20 @@
 import React from 'react';
-import Navbar from "src/app/components/NavbarMylearningTrainee"
-import Sidebar from "src/app/components/SidebarAdmin"
+import Navbar from "src/app/components/NavbarMylearningTrainee";
+import Sidebar from "src/app/components/SidebarAdmin";
 import { LayoutDashboard, UserCircle, Users, Briefcase, CreditCard, Calendar, MessageSquare, Contact, Settings, LogOut } from 'lucide-react';
 import SideBarAdmin from 'src/app/components/SidebarAdmin';
-import Navbar1 from "src/app/components/navbarMylearning"
+import Navbar1 from "src/app/components/navbarMylearning";
+import { LucideIcon } from 'lucide-react'; // Import LucideIcon for the icon prop
 
-const DashboardCard = ({ title, count, icon: Icon }) => (
+// Define the props for the DashboardCard component
+interface DashboardCardProps {
+  title: string;
+  count: number;
+  icon: LucideIcon; // Use LucideIcon for the icon prop
+}
+
+// DashboardCard component
+const DashboardCard = ({ title, count, icon: Icon }: DashboardCardProps) => (
   <div className="bg-white p-6 rounded-lg shadow-sm flex flex-col items-center justify-center">
     <div className="bg-gray-200 p-4 rounded-full mb-4">
       <Icon className="w-6 h-6 text-gray-600" />
@@ -15,8 +24,7 @@ const DashboardCard = ({ title, count, icon: Icon }) => (
   </div>
 );
 
-
-
+// Dashboard component
 const Dashboard = () => {
   const dashboardData = [
     { title: 'Trainer', count: 4, icon: UserCircle },
@@ -33,32 +41,27 @@ const Dashboard = () => {
 
   return (
     <header className="text-black">
-      <Navbar1/>
-     
-       <div className="flex min-h-screen bg-gray-50">
+      <Navbar1 />
+      <div className="flex min-h-screen bg-gray-50">
+        {/* Sidebar */}
+        <SideBarAdmin />
 
-{/* Sidebar */}
-<SideBarAdmin/>
-
-{/* Main Content */}
-<main className="flex-1 p-8">
-  <h1 className="text-2xl font-bold mb-8">Dashboard</h1>
-  
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-    {dashboardData.map((item, index) => (
-      <DashboardCard
-        key={index}
-        title={item.title}
-        count={item.count}
-        icon={item.icon}
-      />
-    ))}
-  </div>
-</main>
-</div>
+        {/* Main Content */}
+        <main className="flex-1 p-8">
+          <h1 className="text-2xl font-bold mb-8">Dashboard</h1>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {dashboardData.map((item, index) => (
+              <DashboardCard
+                key={index}
+                title={item.title}
+                count={item.count}
+                icon={item.icon}
+              />
+            ))}
+          </div>
+        </main>
+      </div>
     </header>
-
-   
   );
 };
 

@@ -6,56 +6,68 @@ import Navbar1 from "src/app/components/traineeNavbar"; // Import the custom Nav
 import banner from 'public/images/Rectangle 2.png'; // Import the banner image
 import mission from 'public/images/Rectangle 338.png'; // Import mission image
 import scc from 'public/images/339.png'; // Import benefits image
-import trainer from 'public/images/Trainer2.png';
-import axios from "axios";
- // Import trainer image
+import trainer from 'public/images/Trainer2.png'; // Import trainer image
+import axios, { AxiosError } from "axios";
+
+// Define the type for a comment
+interface Comment {
+  name: string;
+  message: string;
+  approved: boolean;
+}
 
 const Page = () => {
-  // State to handle the name input by user for the comment
-  const [name, setName] = useState(""); 
-
-  // State to handle the message or comment text input
-  const [message, setMessage] = useState(""); 
-
-  // State to handle loading comments
-  const [comments, setComments] = useState([]);
-
-  // State to manage loading state
+  const [name, setName] = useState(""); // User's name
+  const [message, setMessage] = useState(""); // User's comment
+  const [comments, setComments] = useState<Comment[]>([]); // Store all comments with type
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // State to manage any errors during API calls
-  const [error, setError] = useState(null);
-
-  // Function to fetch comments (you can replace with an API call)
+  // Fetch comments from the API
   const fetchComments = async () => {
     try {
-      const response = await axios.get("/api/comments?page=martial-arts");
-      const approvedComments = response.data.filter((comment) => comment.approved);
+      const response = await axios.get<Comment[]>("/api/commentsFetch"); // Custom API endpoint
+      console.log("Fetched Comments:", response.data); // Log the response to check if comments are coming correctly
+      const approvedComments = response.data.filter((comment: Comment) => comment.approved); // Show only approved comments
       setComments(approvedComments);
     } catch (err) {
-      setError("Failed to load comments");
+      // Handle the error properly
+      if (err instanceof Error) {
+        console.error("Error fetching comments:", err.message); // Log the error details for debugging
+        setError("Failed to load comments");
+      }
     }
   };
-  
-  const handleSubmit = async (e) => {
+
+  // Handle comment submission
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post("/api/comments", { name, message, page: "martial-arts" });
+      console.log("Submitting Comment:", { name, message }); // Log payload
+      await axios.post("/api/comments", { name, message });
       setName("");
       setMessage("");
       fetchComments();
     } catch (err) {
-      setError("Failed to submit your comment. Try again.");
+      // Handle the error properly
+      if (axios.isAxiosError(err)) {
+        // Axios-specific error handling
+        console.error("Submission Error:", err.response?.data || err.message); // Log error details
+        setError("Failed to submit your comment. Try again.");
+      } else if (err instanceof Error) {
+        // Generic error handling
+        console.error("Submission Error:", err.message);
+        setError("Failed to submit your comment. Try again.");
+      }
     } finally {
       setLoading(false);
     }
   };
-  
 
   // Fetch comments when the page loads
   useEffect(() => {
-    fetchComments(); // Trigger comment fetch when page loads
+    fetchComments();
   }, []);
 
   return (
@@ -70,7 +82,7 @@ const Page = () => {
             <Image
               src={banner} // Background image
               alt="Background"
-              layout="fill" 
+              layout="fill"
               objectFit="cover"
               priority={true} // Optimize for loading
             />
@@ -217,22 +229,22 @@ const Page = () => {
 
           {/* Display Comments */}
           <div className="bg-gray-100 py-12">
-          <div className="max-w-screen-lg mx-auto">
-            <h2 className="text-2xl font-semibold mb-6">Comments</h2>
-            {error && <p className="text-red-500">{error}</p>}
-            <ul>
-              {comments.map((comment, index) => (
-                <li
-                  key={index}
-                  className="bg-white p-4 rounded-lg shadow-md mb-4"
-                >
-                  <h3 className="font-bold text-lg">{comment.name}</h3>
-                  <p className="text-gray-700">{comment.message}</p>
-                </li>
-              ))}
-            </ul>
+            <div className="max-w-screen-lg mx-auto">
+              <h2 className="text-2xl font-semibold mb-6">Comments</h2>
+              {error && <p className="text-red-500">{error}</p>}
+              <ul>
+                {comments.map((comment, index) => (
+                  <li
+                    key={index}
+                    className="bg-white p-4 rounded-lg shadow-md mb-4"
+                  >
+                    <h3 className="font-bold text-lg">{comment.name}</h3>
+                    <p className="text-gray-700">{comment.message}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
         </div>
       </main>
     </div>

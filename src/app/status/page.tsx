@@ -1,9 +1,15 @@
 "use client";
 import { useState, useEffect } from "react";
 
+// Define the type for the user object
+interface User {
+  name: string;
+  // Add other properties if needed
+}
+
 export default function StatusPage() {
   const [status, setStatus] = useState("Loading...");
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null); // Explicitly type the user state
 
   useEffect(() => {
     // Retrieve the user data from localStorage or from API if needed
@@ -12,7 +18,8 @@ export default function StatusPage() {
 
       if (userData) {
         try {
-          setUser(JSON.parse(userData));
+          const parsedUser: User = JSON.parse(userData); // Parse and assert the type
+          setUser(parsedUser);
           // Simulate a status check (in a real app, you would call an API here)
           setTimeout(() => {
             // Example logic for pending, approved, or rejected status

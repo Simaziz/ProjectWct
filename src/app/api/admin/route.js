@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import connectToDatabase  from '../../../../lib/db'; // Adjust the path if needed
-import {ObjectId } from 'mongodb';
+import connectToDatabase from '../../../../lib/db'; // Adjust the path if needed
+import { ObjectId } from 'mongodb';
 
 export const POST = async (request) => {
   try {
@@ -12,9 +12,6 @@ export const POST = async (request) => {
 
     // Connect to the database
     const { db } = await connectToDatabase();
-    
-    // Add debugging log
-    console.log('Database connection:', db); // This will help debug if the db is connected properly
 
     if (!db) {
       throw new Error('Failed to connect to the database');
@@ -27,14 +24,22 @@ export const POST = async (request) => {
       return NextResponse.json({ message: 'User not found' }, { status: 404 });
     }
 
-    // Update user status
-    const status = action === 'approve' ? 'approved' : 'rejected';
+    // Determine the new status and role
+    const isApproveAction = action === 'approve';
+    const status = isApproveAction ? 'approved' : 'rejected';
+
+    const roleUpdate = isApproveAction && user.role === 'trainer' ? { role: 'trainer' } : {};
+
+    // Update user status and role (if applicable)
     await db.collection('users').updateOne(
       { _id: new ObjectId(userId) },
-      { $set: { status } }
+      { $set: { status, ...roleUpdate } }
     );
 
-    return NextResponse.json({ message: `User ${status} successfully.` });
+    const roleMessage = roleUpdate.role ? ` and assigned the role of ${roleUpdate.role}` : '';
+    return NextResponse.json({
+      message: `User ${status} successfully${roleMessage}.`,
+    });
   } catch (error) {
     console.error('Error during admin action:', error);
     return NextResponse.json(

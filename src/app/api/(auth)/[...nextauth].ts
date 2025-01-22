@@ -1,13 +1,8 @@
 import NextAuth from "next-auth";
-import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions = {
-  providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-  ],
+  // No providers are configured, so no authentication methods are enabled
+  providers: [], // Empty providers array
   pages: {
     signIn: "/auth/signin", // Custom sign-in page (optional)
   },
