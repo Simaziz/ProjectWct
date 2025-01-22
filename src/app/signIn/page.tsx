@@ -10,7 +10,6 @@ import google from "public/images/Google.webp";
 interface ApiResponse {
   token: string;
   user: {
-    _id: string;
     name?: string;
     email?: string;
   };
@@ -20,7 +19,7 @@ interface ApiResponse {
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<string>(""); // Explicitly type the error state
   const router = useRouter();
 
   const handleSubmit = async (e: FormEvent) => {
@@ -39,19 +38,15 @@ const SignIn = () => {
       if (!res.ok) {
         setError(data.message || "An unknown error occurred.");
       } else {
-        // Log the response to check if the user object and _id are returned
+        // Log the response to check if the user object is returned
         console.log("Login Response:", data);
 
         // Store the token and user data in localStorage on success
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user)); // Set user data
 
-        // Check if user._id exists before redirecting
-        if (data.user && data.user._id) {
-          router.push(`/traineeHome/${data.user._id}`);
-        } else {
-          setError("User ID is missing in the response");
-        }
+        // Redirect to the trainee home page
+        router.push("/traineeHome");
       }
     } catch (error) {
       console.error("Error during signin:", error);

@@ -47,7 +47,7 @@ export default function Signup() {
         localStorage.setItem("user", JSON.stringify(result.user));
         setResponse({ message: "Signup successful! Redirecting...", color: "green" });
 
-        router.push(`/traineeHome/${userId}`); // Redirect to dynamic route
+        router.push(`/traineeHome`); // Redirect to dynamic route
       } else {
         setResponse({ message: result.message || "Signup failed.", color: "red" });
       }

@@ -56,20 +56,20 @@ export async function POST(req) {
       );
     }
 
-    // Generate JWT token
+    // Generate JWT token without userId
     const token = jwt.sign(
-      { userId: user._id, email: user.email, name: user.name },
+      { email: user.email, name: user.name }, // Only include email and name
       process.env.JWT_SECRET, // Ensure JWT_SECRET is set in your .env file
       { expiresIn: "1h" }
     );
     console.log("Token generated:", token);
 
-    // Send successful response including _id of the user
+    // Send successful response without userId
     return new Response(
       JSON.stringify({
         message: "Login successful.",
         token,
-        user: { _id: user._id, name: user.name, email: user.email },
+        user: { name: user.name, email: user.email }, // Only include name and email
       }),
       { status: 200 }
     );

@@ -10,7 +10,7 @@ export default function Sidebar() {
     { name: "Overview", href: "/traineeOverview", icon: "grid" },
     { name: "Workout", href: "/traineeWorkout", icon: "grid" },
     { name: "My Schedule", href: "/traineeSchedule", icon: "calendar" },
-    { name: "Back Home", href: "/traineeHomeafterpay", icon: "Home" },
+    { name: "Back Home", href: "/traineeHome", icon: "Home" },
   ];
 
   return (
